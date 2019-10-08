@@ -11,15 +11,18 @@ type ReduxType = ReturnType<typeof mapStateToProps>
 class MainPageContainer extends React.Component<ReduxType> {
   componentDidMount() {
     request
-    .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;area;flag')
-    .then(response => {
-      store.dispatch(setCountries(response.body))
-    })
+      .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;area;flag')
+      .then(response => {
+        store.dispatch(setCountries(response.body))
+      })
       .catch(console.error);
   }
 
   render() {
-    return <MainPage countries={this.props.countries}/>
+    const randomIndex = Math.floor(Math.random() * this.props.countries.length)
+    const countriesSliced = this.props.countries.slice(randomIndex, randomIndex + 1)
+
+    return <MainPage countriesSliced={countriesSliced} />
   }
 }
 
