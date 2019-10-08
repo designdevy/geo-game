@@ -1,7 +1,11 @@
 import React from 'react';
 import { Country } from '../../entities/Country'
+import './styles.css'
 
-export default function MainPage({ countries }: any) {
-  const countriesSliced = countries.slice(0, 10)
-  return countriesSliced.map((country: Country) => <div key={country.name}><p>{country.name}</p></div>)
+export default function MainPage({ countriesSliced }: any) {
+
+  return countriesSliced.map((country: Country) => <div className="country" key={country.name}>
+    <img src={country.flag} alt={country.name} />
+    <p>{country.name}</p>
+  </div>)
 }
