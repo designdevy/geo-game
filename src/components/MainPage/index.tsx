@@ -10,6 +10,10 @@ import MainPage from './view'
 type ReduxType = ReturnType<typeof mapStateToProps>
 
 class MainPageContainer extends React.Component<ReduxType> {
+  state = {
+    answer: ""
+  }
+
   componentDidMount() {
     request
       .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;area;flag')
@@ -19,14 +23,39 @@ class MainPageContainer extends React.Component<ReduxType> {
       .catch(console.error);
   }
 
+  handleChange = (e: any) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleSubmit = (e: any) => {
+    e.preventDefault();
+    const answerCountry = this.props.countries.find(country => country.name === this.state.answer)
+    if (answerCountry) {
+      store.dispatch(addCountryInGame(answerCountry));
+    this.setState({
+      answer: ""
+    });
+    }
+  };
+
   render() {
     if (this.props.countriesInGame.length < 1 && this.props.countries.length > 1) {
       const randomIndex = Math.floor(Math.random() * this.props.countries.length)
-      const randomCountry  = this.props.countries.slice(randomIndex, randomIndex + 1)
+      const randomCountry = this.props.countries.slice(randomIndex, randomIndex + 1)[0]
       store.dispatch(addCountryInGame(randomCountry))
     }
 
-    return <MainPage countriesInGame={this.props.countriesInGame} />
+    const task = this.props.countriesInGame[this.props.countriesInGame.length-1]
+
+    return <MainPage
+      countriesInGame={this.props.countriesInGame}
+      task={task}
+      answer={this.state.answer}
+      handleSubmit={this.handleSubmit}
+      handleChange={this.handleChange}
+    />
   }
 }
 

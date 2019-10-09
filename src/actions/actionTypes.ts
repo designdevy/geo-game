@@ -5,5 +5,9 @@ export interface ActionTypeBase {
 }
 
 export interface CountriesActionType extends ActionTypeBase {
-  countries? : Country[];
+  countries : Country[];
+}
+
+export interface CountryActionType extends ActionTypeBase {
+  country : Country;
 }
