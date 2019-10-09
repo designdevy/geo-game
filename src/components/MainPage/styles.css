@@ -2,6 +2,13 @@
   display: flex;
 }
 
+.task {
+  background-color: #FFFFFF;
+  width: 500px;
+  margin: 10px auto;
+  padding-bottom: 10px;
+}
+
 .country {
   width: 50%;
   margin: 50px auto;
@@ -11,8 +18,79 @@
 .country img {
   width: 300px;
   border: 1px solid black;
+  margin: 30px auto 0 auto;
 }
 
 .country p {
   font-size: 22px;
+}
+
+.small-flag {
+  width: 25px;
+  margin-right: 10px;
+  border: 1px solid black;
+  opacity: 0.8;
+}
+
+.list-country {
+  font-size: 20px;
+}
+
+.input-form {
+  box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	display: block;
+	width: 100%;
+	padding: 7px;
+	border: none;
+	border-bottom: 1px solid #ddd;
+	background: transparent;
+	margin-bottom: 10px;
+	font: 16px Arial, Helvetica, sans-serif;
+	height: 45px;
+}
+
+.form {
+  font-family: 'Open Sans Condensed', arial, sans;
+	width: 500px;
+	padding: 30px;
+	background: #FFFFFF;
+	margin: 50px auto;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+	-moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+	-webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+}
+
+.input-button {
+  -moz-box-shadow: inset 0px 1px 0px 0px #CFA989;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #CFA989;
+	box-shadow: inset 0px 1px 0px 0px #CFA989;
+	background-color: #CFA989;
+	border: 1px solid #CFA989;
+	display: inline-block;
+	cursor: pointer;
+	color: #FFFFFF;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 14px;
+	padding: 8px 18px;
+	text-decoration: none;
+  text-transform: uppercase;
+  margin: 10px;
+} 
+
+.input-button:hover {
+  background:linear-gradient(to bottom, #CFA989 5%, #C87F42 100%);
+	background-color:#C87F42;
+}
+
+.form-title {
+  background: #CFA989;
+	text-transform: uppercase;
+	font-family: 'Open Sans Condensed', sans-serif;
+	color: white;
+	font-size: 18px;
+	font-weight: 100;
+	padding: 20px;
 }

@@ -6,28 +6,33 @@ export default function MainPage({ countriesInGame, task, answer, handleSubmit, 
   if (task) {
     return (
       <div className="flexbox">
-        <div>
-          <h2>Countries already used:</h2>
+        <div className="form">
+          <h2 className="form-title">Countries already used:</h2>
           {countriesInGame.map((country: Country) => <div className="country-list" key={country.name}>
-            <p>{country.name}</p>
+            <img className="small-flag" src={country.flag} alt={country.name} />
+            <span className="list-country">{country.name}</span>
           </div>)}
         </div>
-        <div className="country" key={task.name}>
-          <img src={task.flag} alt={task.name} />
-          <p>{task.name}</p>
+        <div className="country" >
+          <div className="form-title">Computer answers</div>
+          <div className="task">
+            <img src={task.flag} alt={task.name} />
+            <p>{task.name}</p>
+          </div>
+          <div className="form-title">Your answer</div>
+          <form className="form" onSubmit={handleSubmit}>
+            <input
+              className="input-form"
+              type="text"
+              name="answer"
+              placeholder="Country"
+              value={answer}
+              onChange={handleChange}
+            />
+            <input className="input-button" type="submit" value="Submit" />
+          </form>
         </div>
-        <div className="form-title">Add your country</div>
-        <form className="form" onSubmit={handleSubmit}>
-          <input
-            className="input-form"
-            type="text"
-            name="answer"
-            placeholder="country"
-            value={answer}
-            onChange={handleChange}
-          />
-          <input className="input-button" type="submit" value="Submit" />
-        </form>
+
       </div>
     )
   } else {
