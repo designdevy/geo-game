@@ -1,0 +1,14 @@
+.country {
+  width: 50%;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.country img {
+  width: 300px;
+  border: 1px solid black;
+}
+
+.country p {
+  font-size: 22px;
+}
