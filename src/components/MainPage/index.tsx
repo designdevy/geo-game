@@ -2,6 +2,7 @@ import React from 'react';
 import request from 'superagent';
 import { connect } from "react-redux";
 import { setCountries } from '../../actions/countriesActions'
+import { addCountryInGame } from '../../actions/countriesInGameActions'
 import { StoreStructure } from '../../entities/StoreStructure'
 import store from '../../store'
 import MainPage from './view'
@@ -19,15 +20,19 @@ class MainPageContainer extends React.Component<ReduxType> {
   }
 
   render() {
-    const randomIndex = Math.floor(Math.random() * this.props.countries.length)
-    const countriesSliced = this.props.countries.slice(randomIndex, randomIndex + 1)
+    if (this.props.countriesInGame.length < 1 && this.props.countries.length > 1) {
+      const randomIndex = Math.floor(Math.random() * this.props.countries.length)
+      const randomCountry  = this.props.countries.slice(randomIndex, randomIndex + 1)
+      store.dispatch(addCountryInGame(randomCountry))
+    }
 
-    return <MainPage countriesSliced={countriesSliced} />
+    return <MainPage countriesInGame={this.props.countriesInGame} />
   }
 }
 
 const mapStateToProps = (state: StoreStructure) => ({
-  countries: state.countries
+  countries: state.countries,
+  countriesInGame: state.countriesInGame
 });
 
 export default connect(
