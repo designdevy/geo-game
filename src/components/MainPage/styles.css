@@ -21,7 +21,7 @@
   margin: 30px auto 0 auto;
 }
 
-.country p {
+.task-name {
   font-size: 22px;
 }
 
@@ -49,6 +49,7 @@
 	background: transparent;
 	margin-bottom: 10px;
 	font: 16px Arial, Helvetica, sans-serif;
+	font-style: italic;
 	height: 45px;
 }
 
@@ -93,4 +94,13 @@
 	font-size: 18px;
 	font-weight: 100;
 	padding: 20px;
+}
+
+.error {
+	color: red;
+	font-size: 16px;
+}
+
+.country-list:nth-child(odd) {
+	color: seagreen;
 }
