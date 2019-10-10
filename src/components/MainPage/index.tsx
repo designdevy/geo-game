@@ -33,7 +33,29 @@ class MainPageContainer extends React.Component<ReduxType> {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    const answerCountry = this.props.countries.find(country => country.name === this.state.answer)
+
+    let lastLetter: string = "A"
+
+    if (this.props.countriesInGame.length > 0) {
+      const lastCountry: string[] = this.props.countriesInGame[this.props.countriesInGame.length - 1].name.split("")
+      if (lastCountry[lastCountry.length - 1].match(/[a-z]/)) {
+        lastLetter = lastCountry[lastCountry.length - 1].toUpperCase()
+      } else if (lastCountry[lastCountry.length - 1].match(/[)]/)) {
+        const shortName = this.props.countriesInGame[this.props.countriesInGame.length - 1].name.split("(")[0].trim().split("")
+        lastLetter = shortName[shortName.length - 1].toUpperCase()
+      }
+    }
+
+    if (this.state.answer[0] === lastLetter) {
+      let answerCountry = this.props.countries.find(country => country.name === this.state.answer)
+
+    if (!answerCountry) {
+      answerCountry = this.props.countries.find(country => country.name.slice(0, 6) === this.state.answer.slice(0, 6))
+    }
+
+    if(!answerCountry) {
+      answerCountry = this.props.countries.find(country => country.name.slice(0, 6) === this.state.answer.slice(0, 6))
+    }
 
     //Checking the users answer
     if (answerCountry && !this.props.countriesInGame.includes(answerCountry)) {
@@ -49,6 +71,11 @@ class MainPageContainer extends React.Component<ReduxType> {
     } else {
       this.setState({
         error: "Are you sure? Computer don't know this country."
+      });
+    }
+    } else {
+      this.setState({
+        error: `Add a contry that starts from ${lastLetter}`
       });
     }
   };
