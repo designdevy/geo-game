@@ -2,11 +2,29 @@ import React from 'react';
 import { Country } from '../../entities/Country'
 import './styles.css'
 
-export default function MainPage({ countriesInGame, task, answer, error, lastLetter, handleSubmit, handleChange }: any) {
+export default function MainPage({ 
+  countriesInGame, 
+  task, 
+  answer, 
+  error, 
+  lastLetter, 
+  handleSubmit, 
+  handleChange, 
+  getHint, 
+  hint,
+  gameOver 
+}: any) {
   if (task) {
     return (
       <div className="flexbox">
         <div className="form">
+          <h2 className="form-title">Rules of the game</h2>
+          <ul>
+            <li>You and computer in turn guess the name of the country, that begins from the last letter of the previous country name.</li>
+            <li>You cannot use one name twice.</li>
+            <li>You can use a Hint and see 3 first letters of the possible answer.</li>
+            <li>Game ends when you or computer cannot find any country on the given letter.</li>
+          </ul>
           <h2 className="form-title">Countries already used:</h2>
           {countriesInGame.map((country: Country) => {
             return (
@@ -35,7 +53,10 @@ export default function MainPage({ countriesInGame, task, answer, error, lastLet
               onChange={handleChange}
             />
             <p className="error">{error}</p>
+            <p className="hint">{hint}</p>
             <input className="input-button" type="submit" value="Submit" />
+            <button className="input-button" onClick={getHint}>Hint</button>
+            <button className="input-button" onClick={gameOver}>Quit</button>
           </form>
         </div>
       </div>

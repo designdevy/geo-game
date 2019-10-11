@@ -101,6 +101,11 @@
 	font-size: 16px;
 }
 
+.hint {
+	color:darkgreen;
+	font-size: 16px;
+}
+
 .country-list:nth-child(odd) {
 	color: seagreen;
 }
