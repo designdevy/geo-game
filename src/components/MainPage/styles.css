@@ -109,3 +109,44 @@
 .country-list:nth-child(odd) {
 	color: seagreen;
 }
+
+.rules {
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+}
+
+.game-over {
+	width: 450px;
+	height: 450px;
+	margin: 60px auto;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.game-over-text {
+	text-align: center;
+	padding-top: 40px;
+	color: seagreen;
+}
+
+.new-game-button {
+  -moz-box-shadow: inset 0px 1px 0px 0px #CFA989;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #CFA989;
+	box-shadow: inset 0px 1px 0px 0px #CFA989;
+	background-color: #CFA989;
+	border: 1px solid #CFA989;
+	display: inline-block;
+	cursor: pointer;
+	color: #FFFFFF;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 14px;
+	padding: 8px 18px;
+	text-decoration: none;
+  text-transform: uppercase;
+  margin: 150px;
+} 
+
+.new-game-button:hover {
+  background:linear-gradient(to bottom, #CFA989 5%, #C87F42 100%);
+	background-color:#C87F42;
+}
