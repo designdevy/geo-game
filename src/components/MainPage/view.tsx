@@ -20,10 +20,10 @@ export default function MainPage({
         <div className="form">
           <h2 className="form-title">Rules of the game</h2>
           <ul>
-            <li>You and computer in turn guess the name of the country, that begins from the last letter of the previous country name.</li>
-            <li>You cannot use one name twice.</li>
-            <li>You can use a Hint and see 3 first letters of the possible answer.</li>
-            <li>Game ends when you or computer cannot find any country on the given letter.</li>
+            <li className="rules">You and computer in turn guess the name of the country, that begins from the last letter of the previous country name.</li>
+            <li className="rules">You cannot use one name twice.</li>
+            <li className="rules">You can use a Hint and see 3 first letters of the possible answer.</li>
+            <li className="rules">Game ends when you or computer cannot find any country on the given letter.</li>
           </ul>
           <h2 className="form-title">Countries already used:</h2>
           {countriesInGame.map((country: Country) => {

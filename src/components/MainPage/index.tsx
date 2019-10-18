@@ -2,11 +2,13 @@ import React from 'react';
 import request from 'superagent';
 import { connect } from "react-redux";
 import { setCountries } from '../../actions/countriesActions'
-import { addCountryInGame } from '../../actions/countriesInGameActions'
+import { addCountryInGame, deleteCountriesInGame } from '../../actions/countriesInGameActions'
 import { StoreStructure } from '../../entities/StoreStructure'
 import { Country } from '../../entities/Country'
 import store from '../../store'
 import MainPage from './view'
+import ComputerWin from '../GameOver/ComputerWin'
+import UserWin from '../GameOver/UserWin';
 
 type ReduxType = ReturnType<typeof mapStateToProps>
 
@@ -15,7 +17,7 @@ class MainPageContainer extends React.Component<ReduxType> {
     answer: "",
     error: "",
     hint: "",
-    youWin: false,
+    userWin: false,
     computerWin: false
   }
 
@@ -128,8 +130,9 @@ class MainPageContainer extends React.Component<ReduxType> {
 
   gameOver = (e: any) => {
     e.preventDefault();
+    store.dispatch(deleteCountriesInGame())
     this.setState({
-      computerWin: true
+      computerWin: !this.state.computerWin
     })
   }
 
@@ -150,7 +153,14 @@ class MainPageContainer extends React.Component<ReduxType> {
 
     const task: Country = this.props.countriesInGame[this.props.countriesInGame.length - 1]
 
-    return <MainPage
+    if (this.state.computerWin === true) {
+      return <ComputerWin 
+        gameOver={this.gameOver}
+      />
+    } else if (this.state.userWin === true) {
+      return <UserWin />
+    } else {
+      return <MainPage
       countriesInGame={this.props.countriesInGame}
       task={task}
       answer={this.state.answer}
@@ -162,6 +172,7 @@ class MainPageContainer extends React.Component<ReduxType> {
       hint={this.state.hint}
       gameOver={this.gameOver}
     />
+    }
   }
 }
 

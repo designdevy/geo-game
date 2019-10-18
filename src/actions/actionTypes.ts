@@ -9,5 +9,5 @@ export interface CountriesActionType extends ActionTypeBase {
 }
 
 export interface CountryActionType extends ActionTypeBase {
-  country : Country;
+  country : 0 | Country;
 }
