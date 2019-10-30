@@ -70,6 +70,7 @@ class MainPageContainer extends React.Component<ReduxType> {
 
       //Checking the users answer
       if (answerCountry && !this.props.countriesInGame.includes(answerCountry)) {
+        const lastTypedCountry = answerCountry.name;
         store.dispatch(addCountryInGame(answerCountry));
         this.setState({
           answer: "",
@@ -90,7 +91,7 @@ class MainPageContainer extends React.Component<ReduxType> {
         }
 
         //Getting an array of possible right answers and random answer from it
-        const possibleComputerAnswers: Country[] = this.props.countries.filter(country => country.name[0] === newLastLetter && !usedCountries.includes(country.name))
+        const possibleComputerAnswers: Country[] | undefined = this.props.countries.filter(country => country.name[0] === newLastLetter && !usedCountries.includes(country.name) && country.name !== lastTypedCountry)
         const index2: number = this.randomIndex(possibleComputerAnswers)
         const computerAnswer: Country | undefined = possibleComputerAnswers[index2]
         if (computerAnswer) {
@@ -132,7 +133,10 @@ class MainPageContainer extends React.Component<ReduxType> {
     e.preventDefault();
     store.dispatch(deleteCountriesInGame())
     this.setState({
-      computerWin: !this.state.computerWin
+      computerWin: !this.state.computerWin,
+      answer: "",
+      error: "",
+      hint: ""
     })
   }
 
@@ -154,24 +158,26 @@ class MainPageContainer extends React.Component<ReduxType> {
     const task: Country = this.props.countriesInGame[this.props.countriesInGame.length - 1]
 
     if (this.state.computerWin === true) {
-      return <ComputerWin 
+      return <ComputerWin
         gameOver={this.gameOver}
       />
     } else if (this.state.userWin === true) {
-      return <UserWin />
+      return <UserWin
+        gameOver={this.gameOver}
+      />
     } else {
       return <MainPage
-      countriesInGame={this.props.countriesInGame}
-      task={task}
-      answer={this.state.answer}
-      lastLetter={lastLetter}
-      error={this.state.error}
-      handleSubmit={this.handleSubmit}
-      handleChange={this.handleChange}
-      getHint={this.getHint}
-      hint={this.state.hint}
-      gameOver={this.gameOver}
-    />
+        countriesInGame={this.props.countriesInGame}
+        task={task}
+        answer={this.state.answer}
+        lastLetter={lastLetter}
+        error={this.state.error}
+        handleSubmit={this.handleSubmit}
+        handleChange={this.handleChange}
+        getHint={this.getHint}
+        hint={this.state.hint}
+        gameOver={this.gameOver}
+      />
     }
   }
 }
