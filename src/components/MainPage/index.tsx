@@ -57,15 +57,19 @@ class MainPageContainer extends React.Component<ReduxType> {
 
     const lastLetter: string = this.getLastLetter()
 
-    if (this.state.answer[0] === lastLetter) {
-      let answerCountry = this.props.countries.find(country => country.name === this.state.answer)
+    if (this.state.answer[0].toUpperCase() === lastLetter) {
+      const firstLetterToUppercase = this.state.answer[0].toUpperCase()
+
+      const userAnswer = firstLetterToUppercase + this.state.answer.slice(1, this.state.answer.length)
+
+      let answerCountry = this.props.countries.find(country => country.name === userAnswer)
 
       if (!answerCountry) {
-        answerCountry = this.props.countries.find(country => country.name.slice(0, 6) === this.state.answer.slice(0, 6))
+        answerCountry = this.props.countries.find(country => country.name.slice(0, 6) === userAnswer.slice(0, 6))
       }
 
       if (!answerCountry) {
-        answerCountry = this.props.countries.find(country => country.name.slice(0, 6) === this.state.answer.slice(0, 6))
+        answerCountry = this.props.countries.find(country => country.name.slice(0, 6) === userAnswer.slice(0, 6))
       }
 
       //Checking the users answer
